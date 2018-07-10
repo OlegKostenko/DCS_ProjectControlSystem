@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DCSPCS.WebUI", "DCSPCS.WebU
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DCSPCS.ConsoleTestApp", "DCSPCS.ConsoleTestApp\DCSPCS.ConsoleTestApp.csproj", "{F34CB260-FB19-48EF-9B78-B9C57BDBF5A2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DCSPCS.DAL.DBProject", "DCSPCS.DAL.DBProject\DCSPCS.DAL.DBProject.csproj", "{AFB1D400-4B8B-4B9B-8E58-6283894B8AE7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DCSPCS.DAL.DBWarehouse", "DCSPCS.DAL.DBWarehouse\DCSPCS.DAL.DBWarehouse.csproj", "{488DB30F-D877-4029-AB20-414E45B83829}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,14 @@ Global
 		{F34CB260-FB19-48EF-9B78-B9C57BDBF5A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F34CB260-FB19-48EF-9B78-B9C57BDBF5A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F34CB260-FB19-48EF-9B78-B9C57BDBF5A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFB1D400-4B8B-4B9B-8E58-6283894B8AE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFB1D400-4B8B-4B9B-8E58-6283894B8AE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFB1D400-4B8B-4B9B-8E58-6283894B8AE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFB1D400-4B8B-4B9B-8E58-6283894B8AE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{488DB30F-D877-4029-AB20-414E45B83829}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{488DB30F-D877-4029-AB20-414E45B83829}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{488DB30F-D877-4029-AB20-414E45B83829}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{488DB30F-D877-4029-AB20-414E45B83829}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,4 @@
-﻿using DCSPCS.DAL.DBProject.DbLayer;
+﻿using DCSPCS.DAL.DBWarehouse.DbLayer;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -9,9 +9,9 @@ using Template.Repository.Common;
 
 namespace DCSPCS.Repository.Repositories
 {
-    public class PREquipmentRepository : GenericRepository<PREquipment>
+    public class WREquipmentRepository : GenericRepository<WREquipment>
     {
-        public PREquipmentRepository(DbContext context) : base(context)
+        public WREquipmentRepository(DbContext context) : base(context)
         {
 
         }
