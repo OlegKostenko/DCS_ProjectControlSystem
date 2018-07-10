@@ -59,10 +59,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\DCSPCS.DAL\DCSPCS.DAL.csproj">
-      <Project>{A5CEC73F-BE02-4AB9-AAA1-F3BBE85D81FA}</Project>
-      <Name>DCSPCS.DAL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Template.Repository\Template.Repository.csproj">
       <Project>{AFA83B51-9F0E-43EA-8A40-E54430E0116B}</Project>
       <Name>Template.Repository</Name>

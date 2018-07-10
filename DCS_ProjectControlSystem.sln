@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DCSPCS.DAL", "DCSPCS.DAL\DCSPCS.DAL.csproj", "{A5CEC73F-BE02-4AB9-AAA1-F3BBE85D81FA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DCSPCS.Repository", "DCSPCS.Repository\DCSPCS.Repository.csproj", "{733A1BD5-CBDC-43CC-8B6E-832D9F2423AB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Template.Repository", "Template.Repository\Template.Repository.csproj", "{AFA83B51-9F0E-43EA-8A40-E54430E0116B}"
@@ -23,10 +21,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A5CEC73F-BE02-4AB9-AAA1-F3BBE85D81FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A5CEC73F-BE02-4AB9-AAA1-F3BBE85D81FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A5CEC73F-BE02-4AB9-AAA1-F3BBE85D81FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A5CEC73F-BE02-4AB9-AAA1-F3BBE85D81FA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{733A1BD5-CBDC-43CC-8B6E-832D9F2423AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{733A1BD5-CBDC-43CC-8B6E-832D9F2423AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{733A1BD5-CBDC-43CC-8B6E-832D9F2423AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
