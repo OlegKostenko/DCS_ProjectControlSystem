@@ -1,0 +1,28 @@
+﻿@model DCSPCS.WebUI.Models.Identity.LoginModel
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Вход на сайт</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+        <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
+        <div class="form-group col-md-10">
+            <p>
+                <label>Login</label><br />
+                @Html.EditorFor(x => x.UserName)
+            </p>
+            <p>
+                <label>Пароль</label><br />
+                @Html.EditorFor(x => x.Password)
+            </p>
+            <p><button type="submit">Войти</button></p>
+        </div>
+    </div>
+}

@@ -1,14 +1,16 @@
-﻿using System;
+﻿using DCSPCS.DAL.DBWarehouse.DbLayer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Template.Repository.Common;
 
 namespace DCSPCS.WebUI.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ViewResult Index()
         {
             return View();
         }

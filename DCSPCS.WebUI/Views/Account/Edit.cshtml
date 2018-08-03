@@ -1,0 +1,28 @@
+﻿@model DCSPCS.WebUI.Models.Identity.EditModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Редактировать данные профиля</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+        @Html.ValidationSummary(true, "")
+        <div>
+            <p>User Name: @Html.EditorFor(model => model.UserName)</p>
+        </div>
+        <div>
+            <p>Year: @Html.EditorFor(model => model.Year)</p>
+        </div>
+
+        <div>
+            <div>
+                <input type="submit" value="Сохранить" />
+            </div>
+        </div>
+    </div>
+}
