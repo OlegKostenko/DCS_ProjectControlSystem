@@ -68,13 +68,13 @@ namespace DCSPCS.REST_Api.App_Start
             kernel.Bind<DbContext>().To<WarehouseContext>().InRequestScope();
             kernel.Bind<IGenericRepository<WREquipment>>().To<WREquipmentRepository>();
             kernel.Bind<IGenericRepository<WREquipVendor>>().To<WREquipVendorRepository>();
-            kernel.Bind<DbContext>().To<ProjectContext>().InRequestScope();
-            kernel.Bind<IGenericRepository<PRProduct>>().To<PRProductRepository>();
-            kernel.Bind<IGenericRepository<PREquipVendor>>().To<PREquipVendorRepository>();
-            kernel.Bind<IGenericRepository<PREquipment>>().To<PREquipmentRepository>();
-            kernel.Bind<IGenericRepository<PREquipDescription>>().To<PREquipDescriptionRepository>();
-            kernel.Bind<IGenericRepository<PREqiupData>>().To<PREqiupDataRepository>();
-            kernel.Bind<IGenericRepository<PRDescription>>().To<PRDescriptionRepository>();
+            //kernel.Bind<DbContext>().To<ProjectContext>().InRequestScope();
+            //kernel.Bind<IGenericRepository<PRProduct>>().To<PRProductRepository>();
+            //kernel.Bind<IGenericRepository<PREquipVendor>>().To<PREquipVendorRepository>();
+            //kernel.Bind<IGenericRepository<PREquipment>>().To<PREquipmentRepository>();
+            //kernel.Bind<IGenericRepository<PREquipDescription>>().To<PREquipDescriptionRepository>();
+            //kernel.Bind<IGenericRepository<PREqiupData>>().To<PREqiupDataRepository>();
+            //kernel.Bind<IGenericRepository<PRDescription>>().To<PRDescriptionRepository>();
         }        
     }
 }
