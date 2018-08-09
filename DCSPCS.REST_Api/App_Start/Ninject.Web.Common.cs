@@ -8,6 +8,8 @@ namespace DCSPCS.REST_Api.App_Start
     using System.Web;
     using DCSPCS.DAL.DBProject.DbLayer;
     using DCSPCS.DAL.DBWarehouse.DbLayer;
+    using DCSPCS.Repository.Abstract;
+    using DCSPCS.Repository.Concrete;
     using DCSPCS.Repository.Repositories;
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
@@ -65,16 +67,15 @@ namespace DCSPCS.REST_Api.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<DbContext>().To<WarehouseContext>().InRequestScope();
+            kernel.Bind<IMyContextFactory>().To<MyContextFactory>().InRequestScope();
             kernel.Bind<IGenericRepository<WREquipment>>().To<WREquipmentRepository>();
             kernel.Bind<IGenericRepository<WREquipVendor>>().To<WREquipVendorRepository>();
-            //kernel.Bind<DbContext>().To<ProjectContext>().InRequestScope();
-            //kernel.Bind<IGenericRepository<PRProduct>>().To<PRProductRepository>();
-            //kernel.Bind<IGenericRepository<PREquipVendor>>().To<PREquipVendorRepository>();
-            //kernel.Bind<IGenericRepository<PREquipment>>().To<PREquipmentRepository>();
-            //kernel.Bind<IGenericRepository<PREquipDescription>>().To<PREquipDescriptionRepository>();
-            //kernel.Bind<IGenericRepository<PREqiupData>>().To<PREqiupDataRepository>();
-            //kernel.Bind<IGenericRepository<PRDescription>>().To<PRDescriptionRepository>();
+            kernel.Bind<IGenericRepository<PRProduct>>().To<PRProductRepository>();
+            kernel.Bind<IGenericRepository<PREquipVendor>>().To<PREquipVendorRepository>();
+            kernel.Bind<IGenericRepository<PREquipment>>().To<PREquipmentRepository>();
+            kernel.Bind<IGenericRepository<PREquipDescription>>().To<PREquipDescriptionRepository>();
+            kernel.Bind<IGenericRepository<PREqiupData>>().To<PREqiupDataRepository>();
+            kernel.Bind<IGenericRepository<PRDescription>>().To<PRDescriptionRepository>();
         }        
     }
 }

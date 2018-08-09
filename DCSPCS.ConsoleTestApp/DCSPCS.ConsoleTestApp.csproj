@@ -56,5 +56,15 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DCSPCS.DAL.DBWarehouse\DCSPCS.DAL.DBWarehouse.csproj">
+      <Project>{488DB30F-D877-4029-AB20-414E45B83829}</Project>
+      <Name>DCSPCS.DAL.DBWarehouse</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DCSPCS.Repository\DCSPCS.Repository.csproj">
+      <Project>{733A1BD5-CBDC-43CC-8B6E-832D9F2423AB}</Project>
+      <Name>DCSPCS.Repository</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

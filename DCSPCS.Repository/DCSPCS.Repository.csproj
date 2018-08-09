@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IMyContextFactory.cs" />
+    <Compile Include="Concrete\MyContextFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\PRDescriptionRepository.cs" />
     <Compile Include="Repositories\PREqiupDataRepository.cs" />
