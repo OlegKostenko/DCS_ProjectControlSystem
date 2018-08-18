@@ -1,6 +1,8 @@
-﻿using DCSPCS.DAL.DBWarehouse.DbLayer;
+﻿using AutoMapper;
+using DCSPCS.DAL.DBWarehouse.DbLayer;
 using DCSPCS.Repository.Abstract;
 using DCSPCS.Repository.Concrete;
+using DCSPCS.REST_Api.Models.WarehouseViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,12 +23,49 @@ namespace DCSPCS.REST_Api.Controllers
 
         public IHttpActionResult GetAllItems()
         {
+            //IEnumerable<PhoneDTO> phoneDtos = orderService.GetPhones();
             var context = factory.GetWarehouseContext();
+            
+            IEnumerable<WREquipment> repo = context.Set<WREquipment>().ToList();
 
-                var repo = context.Set<WREquipment>().ToList();
-                return Ok(repo);
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<WREquipment, WREquipmentViewModel>()).CreateMapper();
+            var equipmentViewModels = mapper.Map<IEnumerable<WREquipment>, List<WREquipmentViewModel>>(repo);
+
+            return Ok(equipmentViewModels);
 
         }
+
+        public IHttpActionResult Edit(int id)
+        {
+            var context = factory.GetWarehouseContext();
+            IEnumerable<WREquipment> repo = context.Set<WREquipment>().ToList();
+            if (id == 0)
+                return NotFound();
+            // Настройка AutoMapper
+            Mapper.Initialize(cfg => cfg.CreateMap<WREquipment, WREquipmentViewModel>()
+                    .ForMember("Id", opt => opt.MapFrom(src => src.WREquipID)));
+            WREquipmentViewModel equipment = Mapper.Map<WREquipment, WREquipmentViewModel>(repo.Where(a => a.WREquipID == id).FirstOrDefault());
+            return Ok(equipment);
+        }
+
+        //[HttpPost]
+        //public IHttpActionResult Edit(WREquipmentViewModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        // Настройка AutoMapper
+        //        Mapper.Initialize(cfg => cfg.CreateMap<WREquipment, WREquipmentViewModel>()
+        //            .ForMember("Id", opt => opt.MapFrom(src => src.WREquipID)));
+        //        // Выполняем сопоставление
+        //        WREquipment equipment = Mapper.Map<WREquipmentViewModel, WREquipment>(model);
+
+        //        return RedirectToAction("Index");
+        //    }
+        //    else
+        //    {
+        //        return View(product);
+        //    }
+        //}
         //public Reservation GetReservation(int id)
         //{
         //    return repo.Get(id);
@@ -43,5 +82,5 @@ namespace DCSPCS.REST_Api.Controllers
         //{
         //    repo.Remove(id);
         //}
-    }
+    } 
 }

@@ -21,7 +21,7 @@ namespace DCSPCS.REST_Api.App_Start
     public static class NinjectWebCommon 
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
-
+        private static readonly string connectionString;
         /// <summary>
         /// Starts the application
         /// </summary>
@@ -68,6 +68,8 @@ namespace DCSPCS.REST_Api.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<IMyContextFactory>().To<MyContextFactory>().InRequestScope();
+            kernel.Bind<IUnitOfWorkProject>().To<UnitOfWorkProject>().WithConstructorArgument(connectionString);
+            kernel.Bind<IUnitOfWorkWarehouse>().To<UnitOfWorkWarehouse>().WithConstructorArgument(connectionString);
             kernel.Bind<IGenericRepository<WREquipment>>().To<WREquipmentRepository>();
             kernel.Bind<IGenericRepository<WREquipVendor>>().To<WREquipVendorRepository>();
             kernel.Bind<IGenericRepository<PRProduct>>().To<PRProductRepository>();

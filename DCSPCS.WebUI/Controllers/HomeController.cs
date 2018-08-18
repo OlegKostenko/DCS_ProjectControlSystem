@@ -22,7 +22,7 @@ namespace DCSPCS.WebUI.Controllers
         public async Task<ActionResult> List()
         {
             var client = new HttpClient();
-            var response = await client.GetAsync("http://localhost:50494//api/Warehouse");
+            var response = await client.GetAsync("http://localhost:50494/api/Warehouse");
             if (response.IsSuccessStatusCode)
             {
                 items = JsonConvert.DeserializeObject<List<WREquipment>>(

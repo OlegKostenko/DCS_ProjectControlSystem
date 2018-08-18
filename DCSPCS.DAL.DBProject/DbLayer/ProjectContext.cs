@@ -7,7 +7,8 @@ namespace DCSPCS.DAL.DBProject.DbLayer
 
     public partial class ProjectContext : DbContext
     {
-        public ProjectContext()
+        public ProjectContext() : base("name=ProjectContext") { }
+        public ProjectContext(string connectionString)
             : base("name=ProjectContext")
         {
         }

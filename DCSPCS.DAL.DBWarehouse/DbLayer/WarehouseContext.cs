@@ -11,6 +11,10 @@ namespace DCSPCS.DAL.DBWarehouse.DbLayer
             : base("name=WarehouseContext")
         {
         }
+        public WarehouseContext(string connectioString)
+            : base("name=WarehouseContext")
+        {
+        }
 
         public virtual DbSet<WREquipment> WREquipments { get; set; }
         public virtual DbSet<WREquipVendor> WREquipVendors { get; set; }
