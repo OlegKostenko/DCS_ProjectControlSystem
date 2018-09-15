@@ -6,10 +6,7 @@ namespace DCSPCS.REST_Api.App_Start
     using System;
     using System.Data.Entity;
     using System.Web;
-    using DCSPCS.DAL.DBProject.DbLayer;
-    using DCSPCS.DAL.DBWarehouse.DbLayer;
-    using DCSPCS.Repository.Abstract;
-    using DCSPCS.Repository.Concrete;
+    using DCSPCS.DAL.DbLayer;
     using DCSPCS.Repository.Repositories;
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
@@ -21,7 +18,6 @@ namespace DCSPCS.REST_Api.App_Start
     public static class NinjectWebCommon 
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
-        private static readonly string connectionString;
         /// <summary>
         /// Starts the application
         /// </summary>
@@ -67,17 +63,16 @@ namespace DCSPCS.REST_Api.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<IMyContextFactory>().To<MyContextFactory>().InRequestScope();
-            kernel.Bind<IUnitOfWorkProject>().To<UnitOfWorkProject>().WithConstructorArgument(connectionString);
-            kernel.Bind<IUnitOfWorkWarehouse>().To<UnitOfWorkWarehouse>().WithConstructorArgument(connectionString);
+            kernel.Bind<DbContext>().To<ProjectContext>().InRequestScope();
+            kernel.Bind<IGenericRepository<WRProduct>>().To<WRProductRepository>();
             kernel.Bind<IGenericRepository<WREquipment>>().To<WREquipmentRepository>();
-            kernel.Bind<IGenericRepository<WREquipVendor>>().To<WREquipVendorRepository>();
             kernel.Bind<IGenericRepository<PRProduct>>().To<PRProductRepository>();
-            kernel.Bind<IGenericRepository<PREquipVendor>>().To<PREquipVendorRepository>();
             kernel.Bind<IGenericRepository<PREquipment>>().To<PREquipmentRepository>();
-            kernel.Bind<IGenericRepository<PREquipDescription>>().To<PREquipDescriptionRepository>();
-            kernel.Bind<IGenericRepository<PREqiupData>>().To<PREqiupDataRepository>();
             kernel.Bind<IGenericRepository<PRDescription>>().To<PRDescriptionRepository>();
+            kernel.Bind<IGenericRepository<EquipVendor>>().To<EquipVendorRepository>();
+            kernel.Bind<IGenericRepository<EquipDescription>>().To<EquipDescriptionRepository>();
+            kernel.Bind<IGenericRepository<EquipCategory>>().To<EquipCategoryRepository>();
+            kernel.Bind<IGenericRepository<EqiupData>>().To<EqiupDataRepository>();
         }        
     }
 }

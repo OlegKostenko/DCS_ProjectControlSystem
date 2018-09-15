@@ -9,9 +9,9 @@ using Template.Repository.Common;
 
 namespace DCSPCS.Repository.Repositories
 {
-    public class PREquipmentRepository : GenericRepository<PREquipment>
+    public class EquipVendorRepository : GenericRepository<EquipVendor>
     {
-        public PREquipmentRepository(DbContext context) : base(context)
+        public EquipVendorRepository(DbContext context) : base(context)
         {
 
         }

@@ -7,11 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Template.Repository.Common;
 
-namespace DCSPCS.Repository.Repositories
+namespace DCSPCS.BOL.Services
 {
-    public class PREquipmentRepository : GenericRepository<PREquipment>
+    public class PREquipmentService : GenericRepository<PREquipment>
     {
-        public PREquipmentRepository(DbContext context) : base(context)
+        public PREquipmentService(DbContext context) : base(context)
         {
 
         }

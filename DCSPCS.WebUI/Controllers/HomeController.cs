@@ -1,4 +1,4 @@
-﻿using DCSPCS.DAL.DBWarehouse.DbLayer;
+﻿using DCSPCS.WebUI.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -13,8 +13,8 @@ namespace DCSPCS.WebUI.Controllers
 {
     public class HomeController : Controller
     {
-        public List<WREquipment> items { get; set; }
-
+        //public List<WREquipVendor> vendors { get; set; }
+        //public List<WREquipment> equipments { get; set; }
         public ActionResult Index()
         {
             return View();
@@ -25,11 +25,53 @@ namespace DCSPCS.WebUI.Controllers
             var response = await client.GetAsync("http://localhost:50494/api/Warehouse");
             if (response.IsSuccessStatusCode)
             {
-                items = JsonConvert.DeserializeObject<List<WREquipment>>(
-                await response.Content.ReadAsStringAsync());
-                return View(items);
+                //vendors = JsonConvert.DeserializeObject<List<WREquipVendor>>(
+                //await response.Content.ReadAsStringAsync());
+                //var res = vendors.OrderBy(t => t.WREquipVendorID);
+                //return View(res);
             }
             return HttpNotFound();
+        }
+
+        public async Task<ActionResult> Equipment(int? VendorId, int? Page)
+        {
+            var client = new HttpClient();
+            var response = await client.GetAsync("http://localhost:50494/api/Warehouse");
+            if (response.IsSuccessStatusCode)
+            {
+                //vendors = JsonConvert.DeserializeObject<List<WREquipVendor>>(
+                //await response.Content.ReadAsStringAsync());
+                //var res = vendors.OrderBy(t => t.WREquipVendorID);
+                //if (VendorId == null)
+                //{
+                //    VendorId = res.First().WREquipVendorID;
+                //}
+                //ViewBag.Page = Page;
+
+                //var resVendors = res;
+                //ViewBag.VendorId = new SelectList(resVendors, "WREquipVendorID", "WREquipVendorName", VendorId);
+
+                //return View();
+            }
+            return null;
+        }
+        [HttpPost]
+        public async Task<ActionResult> CityList(int id, int CurrentPage = 1)
+        {
+            var client = new HttpClient();
+            var response = await client.GetAsync("http://localhost:50494/api/Warehouse");
+            if (response.IsSuccessStatusCode)
+            {
+                //equipments = JsonConvert.DeserializeObject<List<WREquipment>>(
+                //await response.Content.ReadAsStringAsync());
+                //var res = equipments.OrderBy(t => t.WREquipID);
+                //var model = new vmWarehouseItemsList() { VendorId = id };
+                //model.paging.CurrentPage = CurrentPage;
+                //model.Equipment = res.Where(t => t.WREquipVendorID == id).AsQueryable();
+                //return PartialView(model);
+            }
+
+            return null;
         }
 
         public ActionResult About()

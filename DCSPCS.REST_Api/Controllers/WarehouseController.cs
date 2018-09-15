@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
-using DCSPCS.DAL.DBWarehouse.DbLayer;
-using DCSPCS.Repository.Abstract;
-using DCSPCS.Repository.Concrete;
+using DCSPCS.BOL.Services;
+using DCSPCS.DAL.DbLayer;
 using DCSPCS.REST_Api.Models.WarehouseViewModels;
 using System;
 using System.Collections.Generic;
@@ -14,38 +13,45 @@ namespace DCSPCS.REST_Api.Controllers
 {
     public class WarehouseController : ApiController
     {
-        IMyContextFactory factory;
+        IEntityService<EqiupData> service;
 
-        public WarehouseController(IMyContextFactory factory)
+        public WarehouseController(IEntityService<EqiupData> service)
         {
-            this.factory = factory;
+            this.service = service;
         }
 
         public IHttpActionResult GetAllItems()
         {
-            //IEnumerable<PhoneDTO> phoneDtos = orderService.GetPhones();
-            var context = factory.GetWarehouseContext();
-            
-            IEnumerable<WREquipment> repo = context.Set<WREquipment>().ToList();
+            service.GetAll();
+            return null;
 
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<WREquipment, WREquipmentViewModel>()).CreateMapper();
-            var equipmentViewModels = mapper.Map<IEnumerable<WREquipment>, List<WREquipmentViewModel>>(repo);
+        }
+        public IHttpActionResult EquipmentList()
+        {
+            //var context = factory.GetWarehouseContext();
 
-            return Ok(equipmentViewModels);
+            //IEnumerable<WREquipment> repo = context.Set<WREquipment>().ToList();
+
+            //var mapper = new MapperConfiguration(cfg => cfg.CreateMap<WREquipment, WREquipmentViewModel>()).CreateMapper();
+            //var equipViewModels = mapper.Map<IEnumerable<WREquipment>, List<WREquipmentViewModel>>(repo);
+
+            //return Ok(equipViewModels);
+            return null;
 
         }
 
         public IHttpActionResult Edit(int id)
         {
-            var context = factory.GetWarehouseContext();
-            IEnumerable<WREquipment> repo = context.Set<WREquipment>().ToList();
-            if (id == 0)
-                return NotFound();
-            // Настройка AutoMapper
-            Mapper.Initialize(cfg => cfg.CreateMap<WREquipment, WREquipmentViewModel>()
-                    .ForMember("Id", opt => opt.MapFrom(src => src.WREquipID)));
-            WREquipmentViewModel equipment = Mapper.Map<WREquipment, WREquipmentViewModel>(repo.Where(a => a.WREquipID == id).FirstOrDefault());
-            return Ok(equipment);
+            //var context = factory.GetWarehouseContext();
+            //IEnumerable<WREquipment> repo = context.Set<WREquipment>().ToList();
+            //if (id == 0)
+            //    return NotFound();
+            //// Настройка AutoMapper
+            //Mapper.Initialize(cfg => cfg.CreateMap<WREquipment, WREquipmentViewModel>()
+            //        .ForMember("Id", opt => opt.MapFrom(src => src.WREquipID)));
+            //WREquipmentViewModel equipment = Mapper.Map<WREquipment, WREquipmentViewModel>(repo.Where(a => a.WREquipID == id).FirstOrDefault());
+            //return Ok(equipment);
+            return null;
         }
 
         //[HttpPost]

@@ -1,4 +1,4 @@
-﻿using DCSPCS.DAL.DBWarehouse.DbLayer;
+﻿using DCSPCS.DAL.DbLayer;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
