@@ -13,7 +13,7 @@ using Template.Repository.Common;
 
 namespace DCSPCS.BOL.Services
 {
-    public class EqiupDataService //: IEntityService<EquipDataDTO>
+    public class EqiupDataService : IEntityService<EqiupDataDTO>
     {
         IGenericRepository<EqiupData> repository;
         readonly IMapper mapper;
@@ -25,48 +25,68 @@ namespace DCSPCS.BOL.Services
             {
                 cfg.AddExpressionMapping();
                 cfg.CreateMap<EqiupData, EqiupDataDTO>()
-                        .ForMember("CategoryID", opt => opt.MapFrom(c => c.EquipCategoryID))
-                        .ForMember("CategoryName", opt => opt.MapFrom(c => c.EquipCategory.EquipCategoryName))
-                        .ForMember("EquipVendorID", opt => opt.MapFrom(c => c.EquipVendorID)).ForMember("EquipVendorName", opt => opt.MapFrom(c => c.EquipVendor.EquipVendorName)).ForMember("EquipDescrID", opt => opt.MapFrom(c => c.EquipDescrID)).ForMember("EquipDescr", opt => opt.MapFrom(c => c.EquipDescription.EquipDescr))
-                        .ForMember("PREquipID", opt => opt.MapFrom(c => c.PREquipments.Select(s => s.PREquipID))).ForMember("WREquipID", opt => opt.MapFrom(c => c.WREquipments.Select(s => s.WREquipID)));
+                        .ForMember("EquipDataID", opt => opt.MapFrom(c => c.EquipDataID))
+                        .ForMember("EquipCategoryID", opt => opt.MapFrom(c => c.EquipCategoryID))
+                        .ForMember("EquipCategoryName", opt => opt.MapFrom(c => c.EquipCategory.EquipCategoryName))
+                        .ForMember("EquipVendorID", opt => opt.MapFrom(c => c.EquipVendorID))
+                        .ForMember("EquipVendorName", opt => opt.MapFrom(c => c.EquipVendor.EquipVendorName))
+                        .ForMember("EquipPartNumber", opt => opt.MapFrom(c => c.EquipPartNumber))
+                        .ForMember("EqiupModelNumber", opt => opt.MapFrom(c => c.EqiupModelNumber))
+                        .ForMember("EquipDescrID", opt => opt.MapFrom(c => c.EquipDescrID))
+                        .ForMember("EquipDescr", opt => opt.MapFrom(c => c.EquipDescription.EquipDescr))
+                        .ForMember("EqiupPowerType", opt => opt.MapFrom(c => c.EqiupPowerType))
+                        .ForMember("EqiupCurrent24VDC", opt => opt.MapFrom(c => c.EqiupCurrent24VDC))
+                        .ForMember("EqiupCurrentUnits", opt => opt.MapFrom(c => c.EqiupCurrentUnits))
+                        .ForMember("EqiupHeatDissipation", opt => opt.MapFrom(c => c.EqiupHeatDissipation))
+                        .ForMember("EqiupHeatDissipationUnits", opt => opt.MapFrom(c => c.EqiupHeatDissipationUnits))
+                        .ForMember("EqiupHeight", opt => opt.MapFrom(c => c.EqiupHeight))
+                        .ForMember("EqiupLength", opt => opt.MapFrom(c => c.EqiupLength))
+                        .ForMember("EqiupDimensionUnits", opt => opt.MapFrom(c => c.EqiupDimensionUnits))
+                        .ForMember("EqiupWeight", opt => opt.MapFrom(c => c.EqiupWeight))
+                        .ForMember("EqiupPrice", opt => opt.MapFrom(c => c.EqiupPrice))
+                        .ForMember("EqiupPriceCurrency", opt => opt.MapFrom(c => c.EqiupPriceCurrency))
+                        .ForMember("EqiupPriceDate", opt => opt.MapFrom(c => c.EqiupPriceDate))
+                        .ForMember("PREquipID", opt => opt.MapFrom(c => c.PREquipments.Select(s => s.PREquipID)))
+                        .ForMember("WREquipID", opt => opt.MapFrom(c => c.WREquipments.Select(d => d.WREquipID)));
 
-                cfg.CreateMap<EquipDataDTO, EqiupData>();
+                cfg.CreateMap<EqiupDataDTO, EqiupData>();
             }).CreateMapper();
         }
 
         public IEnumerable<EqiupDataDTO> GetAll()
         {
-            return (IEnumerable<EqiupDataDTO>)repository.GetAll().Select(a => mapper.Map<EquipDataDTO>(a));
+            return repository.GetAll().Select(a=>mapper.Map<EqiupDataDTO>(a));
         }
 
-        public EquipDataDTO Get(int? id)
+        public EqiupDataDTO Get(int? id)
         {
             if (id == null)
             {
                 throw new Exception("Не установлено id");
             }
 
-            var equipCategory = repository.Get(id.Value);
-            if (equipCategory == null)
+            var equipData = repository.Get(id.Value);
+            if (equipData == null)
                 throw new Exception("Иноформация не найдена");
-            return mapper.Map<EquipDataDTO>(repository.Get(id.Value));
+            return mapper.Map<EqiupDataDTO>(repository.Get(id.Value));
         }
 
-        public IEnumerable<EquipDataDTO> FindBy(Expression<Func<EquipDataDTO, bool>> predicate)
+        public IEnumerable<EqiupDataDTO> FindBy(Expression<Func<EqiupDataDTO, bool>> predicate)
         {
-            Expression<Func<EqiupData, bool>> expr = mapper.Map<Expression<Func<EquipDataDTO, bool>>, Expression<Func<EqiupData, bool>>>(predicate);
-            return repository.FindBy(expr).Select(a => mapper.Map<EquipDataDTO>(a));
+            Expression<Func<EqiupData, bool>> expr = mapper.Map<Expression<Func<EqiupDataDTO, bool>>, Expression<Func<EqiupData, bool>>>(predicate);
+            return repository.FindBy(expr).Select(a => mapper.Map<EqiupDataDTO>(a));
         }
 
-        public void AddOrUpdate(EquipDataDTO obj)
+        public void AddOrUpdate(EqiupDataDTO obj)
         {
-            throw new NotImplementedException();
+            repository.AddOrUpdate(mapper.Map<EqiupData>(obj));
         }
 
-        public void Delete(EquipDataDTO obj)
+        public void Delete(EqiupDataDTO obj)
         {
-            //mapper.Map<EquipDataDTO>(repository.Delete(obj));
+            repository.Delete(mapper.Map<EqiupData>(obj));
         }
+
 
     }
 }

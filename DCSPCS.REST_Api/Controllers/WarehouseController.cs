@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DCSPCS.BOL.DTO;
 using DCSPCS.BOL.Services;
 using DCSPCS.DAL.DbLayer;
 using DCSPCS.REST_Api.Models.WarehouseViewModels;
@@ -13,44 +14,26 @@ namespace DCSPCS.REST_Api.Controllers
 {
     public class WarehouseController : ApiController
     {
-        IEntityService<EqiupData> service;
-
-        public WarehouseController(IEntityService<EqiupData> service)
+        IEntityService<WREquipmentDTO> WREquipment;
+        IEntityService<EquipVendorDTO> EqVendors;
+        public WarehouseController(IEntityService<WREquipmentDTO> WREquipment, IEntityService<EquipVendorDTO> EqVendors)
         {
-            this.service = service;
+            this.WREquipment = WREquipment;
+            this.EqVendors = EqVendors;
         }
 
         public IHttpActionResult GetAllItems()
         {
-            service.GetAll();
-            return null;
-
+            return Ok(WREquipment.GetAll());
         }
-        public IHttpActionResult EquipmentList()
-        {
-            //var context = factory.GetWarehouseContext();
-
-            //IEnumerable<WREquipment> repo = context.Set<WREquipment>().ToList();
-
-            //var mapper = new MapperConfiguration(cfg => cfg.CreateMap<WREquipment, WREquipmentViewModel>()).CreateMapper();
-            //var equipViewModels = mapper.Map<IEnumerable<WREquipment>, List<WREquipmentViewModel>>(repo);
-
-            //return Ok(equipViewModels);
-            return null;
-
-        }
+        //public IHttpActionResult EquipmentList()
+        //{
+        //    return null;
+        //}
 
         public IHttpActionResult Edit(int id)
         {
-            //var context = factory.GetWarehouseContext();
-            //IEnumerable<WREquipment> repo = context.Set<WREquipment>().ToList();
-            //if (id == 0)
-            //    return NotFound();
-            //// Настройка AutoMapper
-            //Mapper.Initialize(cfg => cfg.CreateMap<WREquipment, WREquipmentViewModel>()
-            //        .ForMember("Id", opt => opt.MapFrom(src => src.WREquipID)));
-            //WREquipmentViewModel equipment = Mapper.Map<WREquipment, WREquipmentViewModel>(repo.Where(a => a.WREquipID == id).FirstOrDefault());
-            //return Ok(equipment);
+
             return null;
         }
 

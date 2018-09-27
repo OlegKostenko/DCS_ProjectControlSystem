@@ -6,6 +6,8 @@ namespace DCSPCS.REST_Api.App_Start
     using System;
     using System.Data.Entity;
     using System.Web;
+    using DCSPCS.BOL.DTO;
+    using DCSPCS.BOL.Services;
     using DCSPCS.DAL.DbLayer;
     using DCSPCS.Repository.Repositories;
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
@@ -73,6 +75,14 @@ namespace DCSPCS.REST_Api.App_Start
             kernel.Bind<IGenericRepository<EquipDescription>>().To<EquipDescriptionRepository>();
             kernel.Bind<IGenericRepository<EquipCategory>>().To<EquipCategoryRepository>();
             kernel.Bind<IGenericRepository<EqiupData>>().To<EqiupDataRepository>();
+            kernel.Bind<IEntityService<EqiupDataDTO>>().To<EqiupDataService>();
+            kernel.Bind<IEntityService<EquipCategoryDTO>>().To<EquipCategoryService>();
+            kernel.Bind<IEntityService<EquipDescriptionDTO>>().To<EquipDescriptionService>();
+            kernel.Bind<IEntityService<EquipVendorDTO>>().To<EquipVendorService>();
+            kernel.Bind<IEntityService<PRDescriptionDTO>>().To<PRDescriptionService>();
+            kernel.Bind<IEntityService<PRProductDTO>>().To<PRProductService>();
+            kernel.Bind<IEntityService<WREquipmentDTO>>().To<WREquipmentService>();
+            kernel.Bind<IEntityService<WRProductDTO>>().To<WRProductServise>();
         }        
     }
 }

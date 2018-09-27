@@ -1,4 +1,5 @@
-﻿using DCSPCS.WebUI.Models;
+﻿using DCSPCS.BOL.DTO;
+using DCSPCS.WebUI.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace DCSPCS.WebUI.Controllers
     public class HomeController : Controller
     {
         //public List<WREquipVendor> vendors { get; set; }
-        //public List<WREquipment> equipments { get; set; }
+        public List<WREquipmentDTO> equipments { get; set; }
         public ActionResult Index()
         {
             return View();
@@ -25,10 +26,10 @@ namespace DCSPCS.WebUI.Controllers
             var response = await client.GetAsync("http://localhost:50494/api/Warehouse");
             if (response.IsSuccessStatusCode)
             {
-                //vendors = JsonConvert.DeserializeObject<List<WREquipVendor>>(
-                //await response.Content.ReadAsStringAsync());
-                //var res = vendors.OrderBy(t => t.WREquipVendorID);
-                //return View(res);
+                equipments = JsonConvert.DeserializeObject<List<WREquipmentDTO>>(
+                await response.Content.ReadAsStringAsync());
+                var res = equipments.OrderBy(t => t.WREquipID);
+                return View(res);
             }
             return HttpNotFound();
         }

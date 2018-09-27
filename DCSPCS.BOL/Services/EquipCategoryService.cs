@@ -6,13 +6,14 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Template.Repository.Common;
 
 namespace DCSPCS.BOL.Services
 {
-    public class EquipCategoryService
+    public class EquipCategoryService : IEntityService<EquipCategoryDTO>
     {
         IGenericRepository<EquipCategory> repository;
         readonly IMapper mapper;
@@ -22,21 +23,21 @@ namespace DCSPCS.BOL.Services
             mapper = new MapperConfiguration(cfg =>
             {
                 cfg.AddExpressionMapping();
-                cfg.CreateMap<EquipCategory, EquipDataDTO>()
-                        .ForMember("CategoryID", opt => opt.MapFrom(c => c.EquipCategoryID))
-                        .ForMember("CategoryName", opt => opt.MapFrom(c => c.EquipCategoryName));
+                cfg.CreateMap<EquipCategory, EquipCategoryDTO>()
+                        .ForMember("EquipCategoryID", opt => opt.MapFrom(c => c.EquipCategoryID))
+                        .ForMember("EquipCategoryName", opt => opt.MapFrom(c => c.EquipCategoryName))
+                        .ForMember("EquipDataID", opt => opt.MapFrom(c => c.EqiupDatas.Select(s => s.EquipDataID)));
 
-                cfg.CreateMap<EquipDataDTO, EquipCategory>();
+                cfg.CreateMap<EquipCategoryDTO, EquipCategory>();
             }).CreateMapper();
         }
 
-        public IEnumerable<EquipDataDTO> GetCategorys()
+        public IEnumerable<EquipCategoryDTO> GetAll()
         {
-            // применяем автомаппер для проекции одной коллекции на другую
-            return repository.GetAll().Select(a => mapper.Map<EquipDataDTO>(a));
+            return repository.GetAll().Select(a => mapper.Map<EquipCategoryDTO>(a));
         }
 
-        public EquipDataDTO GetCategory(int? id)
+        public EquipCategoryDTO Get(int? id)
         {
             if (id == null)
             {
@@ -46,9 +47,23 @@ namespace DCSPCS.BOL.Services
             var equipCategory = repository.Get(id.Value);
             if (equipCategory == null)
                 throw new Exception("Каткгория не найдена");
-            return mapper.Map<EquipDataDTO>(repository.Get(id.Value));
-            //return new EquipCategoryDTO { EquipCategoryName = equipCategory.EquipCategoryName,
-             //EquipCategoryID = equipCategory.EquipCategoryID };
+            return mapper.Map<EquipCategoryDTO>(repository.Get(id.Value));
+        }
+
+        public IEnumerable<EquipCategoryDTO> FindBy(Expression<Func<EquipCategoryDTO, bool>> predicate)
+        {
+            Expression<Func<EquipCategory, bool>> expr = mapper.Map<Expression<Func<EquipCategoryDTO, bool>>, Expression<Func<EquipCategory, bool>>>(predicate);
+            return repository.FindBy(expr).Select(a => mapper.Map<EquipCategoryDTO>(a));
+        }
+
+        public void AddOrUpdate(EquipCategoryDTO obj)
+        {
+            repository.AddOrUpdate(mapper.Map<EquipCategory>(obj));
+        }
+
+        public void Delete(EquipCategoryDTO obj)
+        {
+            repository.Delete(mapper.Map<EquipCategory>(obj));
         }
     }
 }

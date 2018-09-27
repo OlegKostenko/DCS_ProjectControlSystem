@@ -329,6 +329,10 @@
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DCSPCS.BOL\DCSPCS.BOL.csproj">
+      <Project>{16791DA2-965B-408C-8307-53B45633CCDC}</Project>
+      <Name>DCSPCS.BOL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DCSPCS.Repository\DCSPCS.Repository.csproj">
       <Project>{733A1BD5-CBDC-43CC-8B6E-832D9F2423AB}</Project>
       <Name>DCSPCS.Repository</Name>
