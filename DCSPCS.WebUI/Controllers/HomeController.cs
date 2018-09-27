@@ -14,8 +14,9 @@ namespace DCSPCS.WebUI.Controllers
 {
     public class HomeController : Controller
     {
-        //public List<WREquipVendor> vendors { get; set; }
+        public List<EquipVendorDTO> vendors { get; set; }
         public List<WREquipmentDTO> equipments { get; set; }
+        public List<EquipCategoryDTO> equips { get; set; }
         public ActionResult Index()
         {
             return View();

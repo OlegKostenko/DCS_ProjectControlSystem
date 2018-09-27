@@ -31,45 +31,32 @@ namespace DCSPCS.REST_Api.Controllers
         //    return null;
         //}
 
-        public IHttpActionResult Edit(int id)
+        public HttpResponseMessage Get(int id)
         {
-
-            return null;
+            WREquipmentDTO equipmentDTO = WREquipment.Get(id);
+            if (equipmentDTO == null)
+                return Request.CreateResponse(HttpStatusCode.NotFound, "NotFound");
+            return Request.CreateResponse(HttpStatusCode.OK, equipmentDTO);
+        }
+        public HttpResponseMessage Post([FromBody]WREquipmentDTO wREquipment)
+        {
+            WREquipment.AddOrUpdate(wREquipment);
+            string tmp = string.Format($"{wREquipment.WREquipID} has been saved");
+            HttpResponseMessage msg = Request.CreateResponse(HttpStatusCode.Created, tmp);
+            string url = Url.Link("DefaultApi", new { id = wREquipment.WREquipID });
+            msg.Headers.Location = new Uri(url);
+            return msg;
         }
 
-        //[HttpPost]
-        //public IHttpActionResult Edit(WREquipmentViewModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        // Настройка AutoMapper
-        //        Mapper.Initialize(cfg => cfg.CreateMap<WREquipment, WREquipmentViewModel>()
-        //            .ForMember("Id", opt => opt.MapFrom(src => src.WREquipID)));
-        //        // Выполняем сопоставление
-        //        WREquipment equipment = Mapper.Map<WREquipmentViewModel, WREquipment>(model);
+        public HttpResponseMessage Remove([FromBody]WREquipmentDTO wREquipment)
+        {
+            WREquipment.Delete(wREquipment);
+            string tmp = string.Format($"{wREquipment.WREquipID} has been deleted");
+            HttpResponseMessage msg = Request.CreateResponse(HttpStatusCode.Moved, tmp);
+            string url = Url.Link("DefaultApi", new { id = wREquipment.WREquipID });
+            msg.Headers.Location = new Uri(url);
+            return msg;
+        }
 
-        //        return RedirectToAction("Index");
-        //    }
-        //    else
-        //    {
-        //        return View(product);
-        //    }
-        //}
-        //public Reservation GetReservation(int id)
-        //{
-        //    return repo.Get(id);
-        //}
-        //public Reservation PostReservation(Reservation item)
-        //{
-        //    return repo.Add(item);
-        //}
-        //public bool PutReservation(Reservation item)
-        //{
-        //    return repo.Update(item);
-        //}
-        //public void DeleteReservation(int id)
-        //{
-        //    repo.Remove(id);
-        //}
     } 
 }
