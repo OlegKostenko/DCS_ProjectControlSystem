@@ -1,0 +1,18 @@
+﻿@model DCSPCS.BOL.DTO.EquipVendorDTO
+
+@{
+    ViewBag.Title = "Edit" + @Model.EquipVendorName;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit - @Model.EquipVendorName</h2>
+
+@using (Html.BeginForm("AddOrUpdate", "Home",
+    FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.EditorForModel()
+
+    <input type="submit" value="Save" />
+    @Html.ActionLink("Cansel and return to List", "List")
+}
+

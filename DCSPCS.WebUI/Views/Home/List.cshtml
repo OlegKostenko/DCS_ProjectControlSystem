@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DCSPCS.BOL.DTO.WREquipmentDTO>
+﻿@model IEnumerable<DCSPCS.BOL.DTO.EquipVendorDTO>
 
 @{
     ViewBag.Title = "List";
@@ -12,19 +12,13 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.WREquipID)
+            @Html.DisplayNameFor(model => model.EquipVendorID)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.WRProdID)
+            @Html.DisplayNameFor(model => model.EquipVendorName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.EquipDataID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.WREquipQty)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.WREquipUnits)
         </th>
         <th></th>
     </tr>
@@ -32,24 +26,20 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.WREquipID)
+            @item.EquipVendorID
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.WRProdID)
+            @Html.ActionLink(item.EquipVendorName, "Edit", new { item.EquipVendorID })
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.EquipDataID)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.WREquipQty)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.WREquipUnits)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @using (Html.BeginForm("Delete", "Home"))
+            {
+                @Html.Hidden("EquipVendorID", item.EquipVendorID)
+                <input type="submit" value="Delete" />
+            }
         </td>
     </tr>
 }

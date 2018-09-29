@@ -27,9 +27,9 @@ namespace DCSPCS.WebUI.Controllers
             var response = await client.GetAsync("http://localhost:50494/api/Warehouse");
             if (response.IsSuccessStatusCode)
             {
-                equipments = JsonConvert.DeserializeObject<List<WREquipmentDTO>>(
+                vendors = JsonConvert.DeserializeObject<List<EquipVendorDTO>>(
                 await response.Content.ReadAsStringAsync());
-                var res = equipments.OrderBy(t => t.WREquipID);
+                var res = vendors.OrderBy(t => t.EquipVendorID);
                 return View(res);
             }
             return HttpNotFound();
@@ -57,25 +57,59 @@ namespace DCSPCS.WebUI.Controllers
             }
             return null;
         }
-        [HttpPost]
-        public async Task<ActionResult> CityList(int id, int CurrentPage = 1)
+        public ViewResult Create()
+        {
+            return View("Edit", new EquipVendorDTO());
+        }
+        public async Task<ActionResult> Edit(int? Id)
         {
             var client = new HttpClient();
             var response = await client.GetAsync("http://localhost:50494/api/Warehouse");
             if (response.IsSuccessStatusCode)
             {
-                //equipments = JsonConvert.DeserializeObject<List<WREquipment>>(
-                //await response.Content.ReadAsStringAsync());
-                //var res = equipments.OrderBy(t => t.WREquipID);
-                //var model = new vmWarehouseItemsList() { VendorId = id };
-                //model.paging.CurrentPage = CurrentPage;
-                //model.Equipment = res.Where(t => t.WREquipVendorID == id).AsQueryable();
-                //return PartialView(model);
+                vendors = JsonConvert.DeserializeObject<List<EquipVendorDTO>>(
+                await response.Content.ReadAsStringAsync());
+                var res = vendors.Find(s => s.EquipVendorID == Id);
+                if (res != null)
+                {
+                    return View(res);
+                }
+                return View("Error");
             }
+            return HttpNotFound();
+        }
+        [HttpPost]
+        public async Task<ActionResult> AddOrUpdate(EquipVendorDTO equip)
+        {
+            var client = new HttpClient();
+            
+            var response = await client.PostAsJsonAsync("http://localhost:50494/api/Warehouse", equip);
 
-            return null;
+            if (response.IsSuccessStatusCode)
+            {
+                // Deserialize the updated product from the response body.
+                equip = JsonConvert.DeserializeObject<EquipVendorDTO>(await response.Content.ReadAsStringAsync());
+                if (equip != null)
+                {
+                    TempData["message"] = string.Format($"{equip.EquipVendorName} is exists!");
+                }
+            }
+            return RedirectToAction("List");
         }
 
+        [HttpPost]
+        public async Task<ActionResult> Delete(EquipVendorDTO equip)
+        {
+            var client = new HttpClient();
+            HttpResponseMessage response = await client.DeleteAsync(
+                $"http://localhost:50494/api/Warehouse/{equip}");
+            String stCode = "410";
+            if (response.StatusCode.ToString() == stCode)
+            {
+                TempData["message"] = string.Format($"{equip.EquipVendorName} was deleted!");
+            }
+            return RedirectToAction("List");
+        }
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

@@ -14,48 +14,50 @@ namespace DCSPCS.REST_Api.Controllers
 {
     public class WarehouseController : ApiController
     {
-        IEntityService<WREquipmentDTO> WREquipment;
+        //IEntityService<WREquipmentDTO> WREquipment;
         IEntityService<EquipVendorDTO> EqVendors;
-        public WarehouseController(IEntityService<WREquipmentDTO> WREquipment, IEntityService<EquipVendorDTO> EqVendors)
+        public WarehouseController(IEntityService<EquipVendorDTO> EqVendors)
         {
-            this.WREquipment = WREquipment;
             this.EqVendors = EqVendors;
         }
 
         public IHttpActionResult GetAllItems()
         {
-            return Ok(WREquipment.GetAll());
+            return Ok(EqVendors.GetAll());
         }
-        //public IHttpActionResult EquipmentList()
-        //{
-        //    return null;
-        //}
 
         public HttpResponseMessage Get(int id)
         {
-            WREquipmentDTO equipmentDTO = WREquipment.Get(id);
-            if (equipmentDTO == null)
+            EquipVendorDTO vendorDTO = EqVendors.Get(id);
+            if (vendorDTO == null)
                 return Request.CreateResponse(HttpStatusCode.NotFound, "NotFound");
-            return Request.CreateResponse(HttpStatusCode.OK, equipmentDTO);
+            return Request.CreateResponse(HttpStatusCode.OK, vendorDTO);
         }
-        public HttpResponseMessage Post([FromBody]WREquipmentDTO wREquipment)
+        [HttpPost]
+        public HttpResponseMessage Post([FromBody]EquipVendorDTO equipVendor)
         {
-            WREquipment.AddOrUpdate(wREquipment);
-            string tmp = string.Format($"{wREquipment.WREquipID} has been saved");
-            HttpResponseMessage msg = Request.CreateResponse(HttpStatusCode.Created, tmp);
-            string url = Url.Link("DefaultApi", new { id = wREquipment.WREquipID });
+            EqVendors.AddOrUpdate(equipVendor);
+            string tmp = string.Format($"{equipVendor.EquipVendorID} has been saved");
+            HttpResponseMessage msg = Request.CreateResponse(HttpStatusCode.OK, tmp);
+            string url = Url.Link("DefaultApi", new { id = equipVendor.EquipVendorID });
             msg.Headers.Location = new Uri(url);
             return msg;
         }
-
-        public HttpResponseMessage Remove([FromBody]WREquipmentDTO wREquipment)
+        [HttpDelete]
+        public HttpResponseMessage Remove([FromBody]EquipVendorDTO equipVendor)
         {
-            WREquipment.Delete(wREquipment);
-            string tmp = string.Format($"{wREquipment.WREquipID} has been deleted");
-            HttpResponseMessage msg = Request.CreateResponse(HttpStatusCode.Moved, tmp);
-            string url = Url.Link("DefaultApi", new { id = wREquipment.WREquipID });
-            msg.Headers.Location = new Uri(url);
-            return msg;
+            if (equipVendor != null)
+            {
+                EqVendors.Delete(equipVendor);
+                string tmp = string.Format($"{equipVendor.EquipVendorID} has been deleted");
+                HttpResponseMessage msg = Request.CreateResponse(HttpStatusCode.Gone, tmp);
+                string url = Url.Link("DefaultApi", new { id = equipVendor.EquipVendorID });
+                msg.Headers.Location = new Uri(url);
+                return msg;
+            }
+            //else
+            //    HttpResponseMessage message = Request.CreateResponse(HttpStatusCode.Gone);
+            return null;
         }
 
     } 
