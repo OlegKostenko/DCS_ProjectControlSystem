@@ -35,17 +35,17 @@ namespace DCSPCS.REST_Api.Controllers
         {
             ProdService.AddOrUpdate(productDTO);
             string tmp = string.Format($"{productDTO.PRProdID} has been saved");
-            HttpResponseMessage msg = Request.CreateResponse(HttpStatusCode.Created, tmp);
+            HttpResponseMessage msg = Request.CreateResponse(HttpStatusCode.OK, tmp);
             string url = Url.Link("DefaultApi", new { id = productDTO.PRProdID});
             msg.Headers.Location = new Uri(url);
             return msg;
         }
         [HttpDelete]
-        public HttpResponseMessage Remove([FromBody]PRProductDTO productDTO)
+        public HttpResponseMessage Delete([FromBody]PRProductDTO productDTO)
         {
             ProdService.Delete(productDTO);
             string tmp = string.Format($"{productDTO.PRProdID} has been deleted");
-            HttpResponseMessage msg = Request.CreateResponse(HttpStatusCode.Moved, tmp);
+            HttpResponseMessage msg = Request.CreateResponse(HttpStatusCode.OK, tmp);
             string url = Url.Link("DefaultApi", new { id = productDTO.PRProdID });
             msg.Headers.Location = new Uri(url);
             return msg;

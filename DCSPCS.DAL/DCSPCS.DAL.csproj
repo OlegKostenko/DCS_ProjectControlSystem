@@ -59,6 +59,8 @@
     <Compile Include="DbLayer\PRProduct.cs" />
     <Compile Include="DbLayer\WREquipment.cs" />
     <Compile Include="DbLayer\WRProduct.cs" />
+    <Compile Include="Entities\ProjectLine.cs" />
+    <Compile Include="Entities\TotalProject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

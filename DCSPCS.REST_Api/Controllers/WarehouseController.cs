@@ -44,13 +44,13 @@ namespace DCSPCS.REST_Api.Controllers
             return msg;
         }
         [HttpDelete]
-        public HttpResponseMessage Remove([FromBody]EquipVendorDTO equipVendor)
+        public HttpResponseMessage Delete([FromBody]EquipVendorDTO equipVendor)
         {
             if (equipVendor != null)
             {
                 EqVendors.Delete(equipVendor);
                 string tmp = string.Format($"{equipVendor.EquipVendorID} has been deleted");
-                HttpResponseMessage msg = Request.CreateResponse(HttpStatusCode.Gone, tmp);
+                HttpResponseMessage msg = Request.CreateResponse(HttpStatusCode.OK, tmp);
                 string url = Url.Link("DefaultApi", new { id = equipVendor.EquipVendorID });
                 msg.Headers.Location = new Uri(url);
                 return msg;

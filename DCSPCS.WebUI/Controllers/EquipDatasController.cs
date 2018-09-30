@@ -1,5 +1,4 @@
 ﻿using DCSPCS.BOL.DTO;
-using DCSPCS.WebUI.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -8,15 +7,12 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Template.Repository.Common;
 
 namespace DCSPCS.WebUI.Controllers
 {
-    public class HomeController : Controller
+    public class EquipDatasController : Controller
     {
-        public List<EquipVendorDTO> vendors { get; set; }
-        public List<WREquipmentDTO> equipments { get; set; }
-        public List<EquipCategoryDTO> equips { get; set; }
+        public List<EqiupDataDTO> equips { get; set; }
         public ActionResult Index()
         {
             return View();
@@ -24,12 +20,12 @@ namespace DCSPCS.WebUI.Controllers
         public async Task<ActionResult> List()
         {
             var client = new HttpClient();
-            var response = await client.GetAsync("http://localhost:50494/api/Warehouse");
+            var response = await client.GetAsync("http://localhost:50494/api/EquipData");
             if (response.IsSuccessStatusCode)
             {
-                vendors = JsonConvert.DeserializeObject<List<EquipVendorDTO>>(
+                equips = JsonConvert.DeserializeObject<List<EqiupDataDTO>>(
                 await response.Content.ReadAsStringAsync());
-                var res = vendors.OrderBy(t => t.EquipVendorID);
+                var res = equips.OrderBy(t => t.EquipDataID);
                 return View(res);
             }
             return HttpNotFound();
@@ -60,7 +56,7 @@ namespace DCSPCS.WebUI.Controllers
         public async Task<ActionResult> AddOrUpdate(EquipVendorDTO equip)
         {
             var client = new HttpClient();
-            
+
             var response = await client.PostAsJsonAsync("http://localhost:50494/api/Warehouse", equip);
 
             if (response.IsSuccessStatusCode)

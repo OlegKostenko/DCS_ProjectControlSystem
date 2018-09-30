@@ -216,7 +216,10 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\EquipCategoryController.cs" />
+    <Compile Include="Controllers\EquipDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PREquipmentController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\WarehouseController.cs" />
@@ -322,6 +325,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\ProjectViewModels\" />
+    <Folder Include="Views\EquipData\" />
     <Folder Include="Views\Warehouse\" />
   </ItemGroup>
   <ItemGroup>
